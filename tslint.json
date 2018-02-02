@@ -10,8 +10,7 @@
         "ban": false,
         "class-name": true,
         "comment-format": [
-            true,
-            "check-space"
+            true
         ],
         "curly": true,
         "eofline": false,
@@ -29,24 +28,15 @@
             "static-before-instance",
             "variables-before-functions"
         ],
-        "no-any": true,
+        "no-any": false,
         "no-arg": true,
         "no-bitwise": true,
-        "no-console": [
-            true,
-            "log",
-            "error",
-            "debug",
-            "info",
-            "time",
-            "timeEnd",
-            "trace"
-        ],
+        "no-console": false,
         "no-consecutive-blank-lines": true,
         "no-construct": true,
         "no-debugger": true,
         "no-duplicate-variable": true,
-        "no-empty": true,
+        "no-empty": false,
         "no-eval": true,
         "no-shadowed-variable": true,
         "no-string-literal": true,
