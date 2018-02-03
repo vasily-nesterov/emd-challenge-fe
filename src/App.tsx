@@ -1,22 +1,48 @@
 import * as React from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import { Prescription } from './lib/Prescription';
+import { Store } from './lib/Store';
+
+import { PrescriptionFormView } from './components/PrescriptionFormView';
+
+import { environment } from './environments/environment';
+
 import './App.css';
 
-const logo = require('./logo.svg');
+const store        = new Store();
+const prescription = new Prescription(store);
 
-class App extends React.Component {
+export class App extends React.Component {
+  constructor(props: any) {
+    super(props);
+    injectTapEventPlugin();
+  }
+
+  doNothing() {
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <div>
+            <AppBar
+              title={environment.appName}
+              iconElementLeft={<IconButton onClick={this.doNothing}>
+                                <ActionAutorenew style={{color: 'white'}} />
+                              </IconButton>}
+            />
+          </div>
+
+          <PrescriptionFormView store={store} prescription={prescription} />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
-
-export default App;
