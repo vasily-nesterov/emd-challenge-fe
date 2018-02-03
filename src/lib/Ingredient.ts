@@ -5,7 +5,6 @@ export class Ingredient {
   @observable name: string;
   @observable minimumPercentage: number;
   @observable maximumPercentage: number;
-  @observable percentage: number;
   @observable description: string;
   @observable classes: string[];
   @observable createdAt: Date;
@@ -20,7 +19,5 @@ export class Ingredient {
     this.classes           = params.classes;
     this.createdAt         = params.created_at;
     this.updatedAt         = params.updated_at;
-
-    this.percentage = params.percentage || this.minimumPercentage;
   }
 }
