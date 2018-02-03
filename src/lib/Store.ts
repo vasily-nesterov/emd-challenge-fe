@@ -45,7 +45,7 @@ export class Store {
     try {
       const response = await fetch(`${environment.backendApiRoot}/ingredients.json`);
 
-      this.ingredients       = await response.json();
+      this.ingredients       = (await response.json()).map(x => new Ingredient(x));
       this.ingredientsStatus = StoreStatus.Success;
     } catch (error) {
       console.log(`Ingredients fetch failed: ${error}`);

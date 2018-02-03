@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 
+import { shouldBePresentError } from '../lib/Errors';
 import { Patient } from '../lib/Patient';
 
 export const PatientFormSectionView = observer((props: any) => {
@@ -16,28 +17,31 @@ export const PatientFormSectionView = observer((props: any) => {
 
       <TextField
         hintText="Name"
-        fullWidth={true}
         floatingLabelText="Name"
         name="patientName"
+        fullWidth={true}
         value={patient.name}
-        onChange={(event) => patient.name = (event.target as HTMLInputElement).value}
+        onChange={(event) => patient.setName((event.target as HTMLInputElement).value)}
+        errorText={shouldBePresentError(patient.nameValidationError)}
       />
       <TextField
         hintText="Address"
-        fullWidth={true}
         floatingLabelText="Address"
         name="patientAddress"
+        fullWidth={true}
         value={patient.address}
-        onChange={(event) => patient.address = (event.target as HTMLInputElement).value}
+        onChange={(event) => patient.setAddress((event.target as HTMLInputElement).value)}
+        errorText={shouldBePresentError(patient.addressValidationError)}
       />
       <DatePicker
         hintText="Date of Birth"
-        fullWidth={true}
         floatingLabelText="Date of Birth"
         name="patientBirthDate"
+        fullWidth={true}
         value={patient.birthDate}
         formatDate={date => moment(date).format(`DD/MM/YYYY`)}
-        onChange={(_null, date) => patient.birthDate = date}
+        onChange={(_null, date) => patient.setBirthDate(date)}
+        errorText={shouldBePresentError(patient.birthDateValidationError)}
       />
     </div>
   );

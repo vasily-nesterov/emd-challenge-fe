@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { PrescriptionFormStore } from '../lib/stores/PrescriptionFormStore';
 
 export const ResetPrescriptionFormDialog = observer((props: any) => {
-  const prescriptionFormStore: PrescriptionFormStore = props.store.prescriptionFormStore;
+  const prescriptionFormStore: PrescriptionFormStore = props.prescriptionFormStore;
 
   const resetDialogActions = [
     <FlatButton label="Cancel" key={1} primary={true} onClick={prescriptionFormStore.closeResetDialog} />,

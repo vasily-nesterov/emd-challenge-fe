@@ -3,13 +3,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
 import AppBar from 'material-ui/AppBar';
-
-import IconButton from 'material-ui/IconButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import IconButton from 'material-ui/IconButton';
 
 import { Prescription } from './lib/Prescription';
 import { Store } from './lib/Store';
 
+import { AddIngredientDialog } from './components/AddIngredientDialog';
 import { PrescriptionFormView } from './components/PrescriptionFormView';
 import { ResetPrescriptionFormDialog } from './components/ResetPrescriptionFormDialog';
 
@@ -40,7 +40,8 @@ export class App extends React.Component {
 
           <PrescriptionFormView store={store} />
 
-          <ResetPrescriptionFormDialog store={store} />
+          <ResetPrescriptionFormDialog prescriptionFormStore={store.prescriptionFormStore} />
+          <AddIngredientDialog store={store} />
         </div>
       </MuiThemeProvider>
     );
