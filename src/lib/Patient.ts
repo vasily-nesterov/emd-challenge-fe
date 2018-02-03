@@ -8,4 +8,10 @@ export class Patient {
   @computed get isValid() {
     return !!this.name && !!this.address && !!this.birthDate;
   }
+
+  public reset() {
+    this.name      = '';
+    this.address   = '';
+    this.birthDate = null;
+  }
 }

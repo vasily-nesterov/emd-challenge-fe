@@ -3,7 +3,10 @@ import { observable, computed } from 'mobx';
 import { Ingredient }  from './Ingredient';
 import { Formulation } from './Formulation';
 
+import { PrescriptionFormStore } from './stores/PrescriptionFormStore';
+
 import { environment } from '../environments/environment';
+import { Prescription } from './Prescription';
 
 enum StoreStatus {
   Loading = 1,
@@ -12,13 +15,17 @@ enum StoreStatus {
 }
 
 export class Store {
-  @observable ingredients       = [] as Ingredient[];
-  @observable ingredientsStatus = StoreStatus.Loading;
+  @observable prescriptionFormStore: PrescriptionFormStore;
 
-  @observable formulations       = [] as Formulation[];
-  @observable formulationsStatus = StoreStatus.Loading;
+  @observable ingredients: Ingredient[]      = [];
+  @observable ingredientsStatus: StoreStatus = StoreStatus.Loading;
+
+  @observable formulations: Formulation[]     = [];
+  @observable formulationsStatus: StoreStatus = StoreStatus.Loading;
 
   constructor() {
+    this.prescriptionFormStore = new PrescriptionFormStore();
+
     this.fetchIngredients();
     this.fetchFormulations();
   }

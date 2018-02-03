@@ -7,11 +7,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import { Prescription } from '../lib/Prescription';
 import { Store } from '../lib/Store';
+import { PrescriptionFormStore } from '../lib/stores/PrescriptionFormStore';
 
 import { PatientFormSectionView } from './PatientFormSectionView';
 
 export const PrescriptionFormView = observer((props: any) => {
-  const { store, prescription } = props;
+  const store: Store                                 = props.store;
+  const prescriptionFormStore: PrescriptionFormStore = store.prescriptionFormStore;
+  const prescription: Prescription                   = prescriptionFormStore.prescription;
 
   return (
     <Grid>
@@ -32,6 +35,7 @@ export const PrescriptionFormView = observer((props: any) => {
                 label="Reset"
                 fullWidth={true}
                 labelStyle={{color: 'gray'}}
+                onClick={prescriptionFormStore.openResetDialog}
               />
             </div>
           </form>
