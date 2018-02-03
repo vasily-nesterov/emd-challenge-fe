@@ -18,7 +18,7 @@ export const AddIngredientDialog = observer((props: any) => {
   const prescription: Prescription = prescriptionFormStore.prescription;
 
   const dialogActions = [
-    <FlatButton key={1} label="Cancel" primary={true} onClick={prescriptionFormStore.closeAddIngredientDialog} />
+    <FlatButton key={1} label="Back" primary={true} onClick={prescriptionFormStore.closeAddIngredientDialog} />
   ];
 
   const unusedIngredientCards = store.ingredients.filter(i => prescription.ingredientIndex(i) === -1).map((ingredient) => {

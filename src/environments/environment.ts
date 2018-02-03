@@ -5,5 +5,9 @@
 
 export const environment = {
   appName:         'EllaMD Coding Challenge',
-  backendApiRoot: 'http://emd-challenge-be.herokuapp.com/api/v1',
+  // backendHost:     'http://emd-challenge-be.herokuapp.com',
+  backendHost:     'http://localhost:3000',
+  backendApiRoot:  ''
 };
+
+environment.backendApiRoot = `${environment.backendHost}/api/v1`;

@@ -5,8 +5,6 @@ import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
-import Add from 'material-ui/svg-icons/content/add';
-
 import { Prescription } from '../lib/Prescription';
 import { PrescriptionFormStore } from '../lib/stores/PrescriptionFormStore';
 
@@ -34,13 +32,7 @@ export const CreamCompositionFormSectionView = observer((props: any) => {
 
   return (
     <div>
-      <h3>
-        Cream Ingredients
-
-        <IconButton tooltip="Add Ingredient" onClick={prescriptionFormStore.openAddIngredientDialog}>
-          <Add/>
-        </IconButton>
-      </h3>
+      <h3>Cream Ingredients</h3>
 
       <div>
         <SelectField

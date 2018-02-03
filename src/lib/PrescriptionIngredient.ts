@@ -15,7 +15,15 @@ export class PrescriptionIngredient {
   }
 
   @computed get isValid(): boolean {
+    console.log(this.percentage, this.ingredient.minimumPercentage, this.ingredient.maximumPercentage);
     return ((this.percentage >= this.ingredient.minimumPercentage) && (this.percentage <= this.ingredient.maximumPercentage));
+  }
+
+  toJSON = () => {
+    return {
+      ingredient_id: this.ingredient.id,
+      percentage:    this.percentage
+    };
   }
 
   get ingredientId(): number {

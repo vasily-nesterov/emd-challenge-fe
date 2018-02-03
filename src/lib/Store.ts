@@ -8,8 +8,8 @@ import { PrescriptionFormStore } from './stores/PrescriptionFormStore';
 import { environment } from '../environments/environment';
 import { Prescription } from './Prescription';
 
-enum StoreStatus {
-  Loading = 1,
+export enum StoreStatus {
+  InProgress = 1,
   Success,
   Failure
 }
@@ -18,10 +18,10 @@ export class Store {
   @observable prescriptionFormStore: PrescriptionFormStore;
 
   @observable ingredients: Ingredient[]      = [];
-  @observable ingredientsStatus: StoreStatus = StoreStatus.Loading;
+  @observable ingredientsStatus: StoreStatus = StoreStatus.InProgress;
 
   @observable formulations: Formulation[]     = [];
-  @observable formulationsStatus: StoreStatus = StoreStatus.Loading;
+  @observable formulationsStatus: StoreStatus = StoreStatus.InProgress;
 
   constructor() {
     this.prescriptionFormStore = new PrescriptionFormStore();
@@ -38,7 +38,7 @@ export class Store {
       return StoreStatus.Success;
     }
 
-    return StoreStatus.Loading;
+    return StoreStatus.InProgress;
   }
 
   private async fetchIngredients() {
@@ -57,7 +57,7 @@ export class Store {
     try {
       const response = await fetch(`${environment.backendApiRoot}/formulations.json`);
 
-      this.formulations       = await response.json();
+      this.formulations       = (await response.json()).map(x => new Formulation(x));
       this.formulationsStatus = StoreStatus.Success;
     } catch (error) {
       console.log(`Formulations fetch failed: ${error}`);

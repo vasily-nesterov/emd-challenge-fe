@@ -4,9 +4,11 @@ import { Formulation } from './Formulation';
 import { Ingredient } from './Ingredient';
 import { Patient } from './Patient';
 import { PrescriptionIngredient } from './PrescriptionIngredient';
-import permCameraMic from 'material-ui/svg-icons/action/perm-camera-mic';
+
+import { environment } from '../environments/environment';
 
 export class Prescription {
+  @observable id: number | null;
   @observable patient: Patient;
   @observable formulation: Formulation | null;
   @observable prescriptionIngredients: PrescriptionIngredient[];
@@ -22,9 +24,31 @@ export class Prescription {
            (this.prescriptionIngredients.map(pi => pi.percentage).reduce(((acc, next) => acc + next), 0) <= 100);
   }
 
+  @computed get isSubmitted(): boolean {
+    return !!this.id;
+  }
+
+  get pdfUrl(): string {
+    return `${environment.backendHost}/prescriptions/${this.id}.pdf`;
+  }
+
+  toJSON = () => {
+    return {
+      prescription: {
+        patient_name:       this.patient.name,
+        patient_address:    this.patient.address,
+        patient_birth_date: this.patient.birthDate,
+        formulation_id:     (this.formulation && this.formulation.id),
+
+        ingredients_prescriptions_attributes: this.prescriptionIngredients.map(pi => pi.toJSON())
+      }
+    };
+  }
+
   applyFormulation = (formulation: Formulation) => {
     this.formulation = formulation;
     this.prescriptionIngredients = formulation.ingredients.map(ingredient => {
+      console.log(ingredient);
       return new PrescriptionIngredient(ingredient, this, ingredient.percentage);
     });
   }
@@ -47,6 +71,10 @@ export class Prescription {
 
   ingredientIndex = (ingredient: Ingredient) => {
     return this.prescriptionIngredients.findIndex((prescriptionIngredient, index) => prescriptionIngredient.ingredientId === ingredient.id);
+  }
+
+  downloadPDF = () => {
+    window.open(this.pdfUrl, `_blank`);
   }
 
   reset = () => {

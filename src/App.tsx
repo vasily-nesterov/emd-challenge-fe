@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import IconButton from 'material-ui/IconButton';
 
 import { Prescription } from './lib/Prescription';
-import { Store } from './lib/Store';
+import { Store, StoreStatus } from './lib/Store';
 
 import { AddIngredientDialog } from './components/AddIngredientDialog';
 import { PrescriptionFormView } from './components/PrescriptionFormView';

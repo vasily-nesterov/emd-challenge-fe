@@ -16,7 +16,7 @@ import { Prescription } from '../lib/Prescription';
 
 const styles = {
   card: {
-    marginBottom: '20px',
+    marginTop: '20px',
     boxDhadow: 'rgba(0, 0, 0, 1) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px'
   },
   chip: {

@@ -9,7 +9,7 @@ import { PrescriptionFormStore } from '../lib/stores/PrescriptionFormStore';
 export const ResetPrescriptionFormDialog = observer((props: any) => {
   const prescriptionFormStore: PrescriptionFormStore = props.prescriptionFormStore;
 
-  const resetDialogActions = [
+  const dialogActions = [
     <FlatButton label="Cancel" key={1} primary={true} onClick={prescriptionFormStore.closeResetDialog} />,
     <FlatButton label="Reset"  key={2} primary={true} keyboardFocused={true} onClick={prescriptionFormStore.reset} />
   ];
@@ -17,7 +17,7 @@ export const ResetPrescriptionFormDialog = observer((props: any) => {
   return (
     <Dialog
       title="Reset Form"
-      actions={resetDialogActions}
+      actions={dialogActions}
       modal={false}
       open={prescriptionFormStore.isResetDialogOpen}
       onRequestClose={prescriptionFormStore.closeResetDialog}
