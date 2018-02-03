@@ -18,8 +18,8 @@ export class Prescription {
 
   @computed get isValid() {
     return this.patient.isValid &&
-           this.prescriptionIngredients.map(pi => pi.isValid).reduce((acc, next) => acc && next) &&
-           (this.prescriptionIngredients.map(pi => pi.percentage).reduce((acc, next) => acc + next) <= 100);
+           this.prescriptionIngredients.map(pi => pi.isValid).reduce(((acc, next) => acc && next), true) &&
+           (this.prescriptionIngredients.map(pi => pi.percentage).reduce(((acc, next) => acc + next), 0) <= 100);
   }
 
   applyFormulation = (formulation: Formulation) => {
@@ -35,8 +35,6 @@ export class Prescription {
     if (index === -1) {
       this.prescriptionIngredients.push(new PrescriptionIngredient(ingredient, this, percentage));
     }
-
-    console.log(this.prescriptionIngredients);
   }
 
   removeIngredient = (ingredient: Ingredient) => {

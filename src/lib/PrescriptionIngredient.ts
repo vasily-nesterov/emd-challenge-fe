@@ -14,12 +14,12 @@ export class PrescriptionIngredient {
     this.percentage   = percentage;
   }
 
-  get ingredientId(): number {
-    return (this.ingredient && this.ingredient.id);
+  @computed get isValid(): boolean {
+    return ((this.percentage >= this.ingredient.minimumPercentage) && (this.percentage <= this.ingredient.maximumPercentage));
   }
 
-  get isValid(): boolean {
-    return ((this.percentage >= this.ingredient.minimumPercentage) && (this.percentage <= this.ingredient.maximumPercentage));
+  get ingredientId(): number {
+    return (this.ingredient && this.ingredient.id);
   }
 
   get isInUse(): boolean {
