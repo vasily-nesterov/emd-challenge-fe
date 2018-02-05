@@ -8,8 +8,22 @@ import TextField from 'material-ui/TextField';
 import { shouldBePresentError } from '../lib/Errors';
 import { Patient } from '../lib/Patient';
 
+declare global {
+  namespace JSX {
+    interface IntrinsicAttributes {
+      openToYearSelection?: boolean;
+    }
+  }
+}
+
 export const PatientFormSectionView = observer((props: any) => {
   const { patient } = props;
+  const today = new Date();
+  const minBirthDate = new Date();
+  minBirthDate.setFullYear(1900);
+
+  const maxBirthDate = new Date();
+  maxBirthDate.setFullYear(today.getFullYear() - 1);
 
   return (
     <div>
@@ -37,7 +51,11 @@ export const PatientFormSectionView = observer((props: any) => {
         hintText="Date of Birth"
         floatingLabelText="Date of Birth"
         name="patientBirthDate"
+        autoOk={true}
         fullWidth={true}
+        openToYearSelection={true}
+        minDate={minBirthDate}
+        maxDate={maxBirthDate}
         value={patient.birthDate}
         formatDate={date => moment(date).format(`DD/MM/YYYY`)}
         onChange={(_null, date) => patient.setBirthDate(date)}
