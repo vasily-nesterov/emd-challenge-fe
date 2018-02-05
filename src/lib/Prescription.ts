@@ -53,6 +53,10 @@ export class Prescription {
     });
   }
 
+  hasIngredient = (ingredient: Ingredient) => {
+    return (this.ingredientIndex(ingredient) > -1);
+  }
+
   addIngredient = (ingredient: Ingredient, percentage: number) => {
     const index = this.ingredientIndex(ingredient);
 
